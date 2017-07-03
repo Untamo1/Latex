@@ -1,0 +1,414 @@
+\documentclass[11pt,a4paper,leqno]{amsart}
+%\usepackage{calrsfs}  % Nice calligraphics
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Page settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[notref]{showkeys}
+%\addtolength{\textwidth}{2em}
+%\addtolength{\hoffset}{-1em}
+%\addtolength{\textheight}{2ex}
+%\addtolength{\voffset}{-1ex}
+\usepackage{graphicx,color}
+\setlength{\parskip}{.6ex plus .2ex minus .2ex}
+\setlength{\emergencystretch}{1em}
+\setlength{\mathsurround}{.5pt}
+\renewcommand{\baselinestretch}{1.05}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{enumerate}
+%\usepackage[colorlinks]{hyperref}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{bbm}
+
+
+\newcommand{\dist}{\xrightarrow[]{d}}
+
+\newcommand{\x}{\bm{x}}
+\newcommand{\A}{\bm{A}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Pm}{\mathbb{P}}
+
+\newcommand{\B}{\mathcal{B}}
+
+\newcommand{\Lm}{\mathcal{L}}
+
+\newcommand{\dd}{\textnormal{d}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\Leb}{\textnormal{Leb}}
+\newcommand{\Var}{\textnormal{Var}}
+\newcommand{\Cov}{\textnormal{Cov}}
+\newcommand{\X}{\mathfrak{X}}
+
+\newcommand{\sym}{\textnormal{S}}
+\newcommand{\Ree}{\textnormal{Re}}
+\newcommand{\Imm}{\textnormal{Im}}
+\newcommand{\ve}{\textnormal{vec}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Equation and theorem numberings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\swapnumbers
+%\numberwithin{equation}{section}
+\renewcommand{\theenumi}{{\rm (\roman{enumi})\,}}
+\renewcommand{\labelenumi}{\theenumi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\p}{\partial}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\lla}{\langle\!\!\langle\!\!\langle}
+\newcommand{\rra}{\rangle\!\!\rangle\!\!\rangle}
+\newcommand{\vvbar}{\,|\!\!|\!\!|\!\!|\,}
+\newcommand{\llla}{\langle\!\langle\!\!\langle}
+\newcommand{\rrra}{\rangle\!\!\rangle\!\rangle}
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+%\newcommand{\1}{1}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\T}{\mathcal{T}}
+
+
+%% Vectors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\g}{\mathbf{g}}
+\newcommand{\G}{\mathbf{G}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\SSigma}{\mathbf{\Sigma}}
+\newcommand{\mmu}{\boldsymbol{\mu}}
+
+%% Operators and Spaces %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\I}{\mathcal{I}}
+\renewcommand{\L}{\mathcal{L}}
+
+
+
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\va}{\mathbf{a}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vmu}{\mathbf{\mu}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Theorem styles and numbering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+\newtheorem{ass}{Assumption}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{pro}{Proposition}
+\newtheorem{cor}{Corollary}
+\newtheorem{lma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{exa}{Example}
+\newtheorem{nts}{Note to Self}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Spaces around equations and between equation array lines
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setlength{\abovedisplayskip}{1ex plus .2ex minus .2ex}
+%\setlength{\belowdisplayskip}{1ex plus .2ex minus .2ex}
+%\setlength{\jot}{0.5ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Title stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\title[CLT]{On the asymptotics}
+\date{\today}
+
+
+
+\section{Introduction}
+TODO:
+\begin{itemize}
+\item Lineaariset prosessit (laajempi, lukee mukaan ARMA:t)
+
+\item General multivariate time series (convergence, includes ARMA)
+
+\item General complex valued time series 
+
+\item BSS with new words 
+
+\item Discrete time series
+\end{itemize}
+
+In Section \ref{sec:results} we study the asymptotic properties of autocovariance estimators and review some well-known limiting theorems. 
+
+\section{Complex valued time series}
+\label{sec:ctimeseries}
+In this section, we review some basic definitions and classical estimators of complex valued time series. Additionally, we recall the definition of the complex multivariate normal distribution. 
+Let $\left(z_t\right)_{t\in \N}$ be a $d$-variate complex valued stationary  time series.   We  use superscripts to denote the components of the time series at a given point of time $t \in \N = \left\{1,2,\ldots\right\}$,
+\begin{align*}
+z_t = \left( z_t^{(1)}, z_t^{(2)},\ldots, z_t^{(d)} \right),
+\end{align*}
+where $z_t^{(k)} = a_t^{(k)} + ib_t^{(k)} $, for $k \in \left\{1,2,\ldots,d\right\}$ and $i$ is the imaginary unit. Furthermore, $a_t^{(k)}, b_t^{(k)} \in \R$ for every $t \in \N$ and $k \in \left\{1,2,\ldots,d\right\}$. 
+
+
+%We want to emphasize that the real and the imaginary part are not required to be independent of each other.
+
+The classical estimators of the multivariate mean and the autocovariance matrix with lag $\tau \in \left\{0\right\} \cup \N $ are defined as follows,
+\begin{align*}
+&m_{z_t} = \E\left[z_t\right]\in \C^d, &S_{\tau} = \E\left[\left(z_t - m_{z_t} \right)\left( z_{t+\tau} - m_{z_t}\right)^*\right]\in \C^{d\times d},
+\end{align*}
+where $z_t^* = \bar{z}_t^T$ is the conjugate transpose of $z_t$.  Let $ \left(Z_t \right)_{t\in \T}$, $\T = \left\{ 1,2,\ldots, T\right\}$, be a finite realization of the time series $\left(z_t\right)_{t\in \N}$.  The finite sample estimators of the mean vector and the autocovariance matrix with lag $\tau \in \left\{0,1,\ldots,T-1\right\}$ are then
+\begin{align*}
+& \hat{m}_{Z_t} = \frac{1}{T}\sum_{t=1}^T Z_t,
+&\hat{S}_{\tau} = \frac{1}{T-\tau}\sum_{t=1}^{T-\tau} \left(Z_t -  \hat{m}_{Z_t}\right)\left(Z_{t+\tau}-\hat{m}_{Z_t}\right)^*.
+\end{align*}
+Note that the estimator $\hat{S}_\tau$ does not necessarily produce conjugate symmetric estimates. Since the population quantity $S_\tau$ is conjugate symmetric, it is natural to use the symmetrized version of the autocovariance matrix estimator,
+\begin{align*}
+\hat{S}^\sym_\tau = \frac{1}{2} \left(\hat{S}_\tau + \hat{S}_\tau^* \right).
+\end{align*}
+
+
+
+
+
+Let $y_1$ and $y_2$ be $d$-variate real valued random vectors such that $\ve\left(y_1,y_2\right)$ follows a $2d$-variate normal distribution. Then the $d$-variate complex valued random vector $y = y_1 +iy_2$ follows the $d$-variate complex normal distribution with the location parameter $\mu$, the covariance matrix $\Sigma$ and the relation matrix $C$, defined as follows, 
+\begin{align*}
+&\mu = \E\left[y\right] = \E\left[y_1\right] + \E\left[ y_2 \right],
+& \Sigma = \E\left[\left( y - \mu  \right) \left(y - \mu \right)^* \right],\\
+& C = \E\left[\left( y - \mu  \right) \left(y - \mu \right)^T \right].
+\end{align*}
+
+
+
+
+
+\section{Asymptotic properties of autocovariance estimators}
+\label{sec:results}
+Puhutaan paljon reaaliarvoisista jutuista koska kompleksisuus palautuu siihen. 
+
+In this section we study the asymptotic properties of multivariate autocovariance estimators for complex valued (second-order) stationary time series. 
+
+
+\begin{dfn}[Stationarity]
+The complex valued time series $\left(z_t\right)_{t\in \N}$ is strictly stationary if, for any positive integer $\tau$ and for any finite subset $S$ of $\N$,
+\begin{align*}
+\left\{ X_{t+\tau}: t\in S\right\} \textnormal{ has the same distribution as } \left\{ X_{t}: t\in S\right\}.
+\end{align*}
+
+\end{dfn}
+
+\begin{rem}
+asd
+\end{rem}
+
+
+\begin{dfn}[Hermite rank]
+Let $X$ be a $d$-dimensional centered stationary Gaussian vector, $x=\left(x^{(1)},x^{(2)},\ldots, x^{(d)} \right)$, where $d \geq 1$ and the components of $x$ are real-valued. Let $f: \R^d \rightarrow \R$ and $f\in L^2\left( \R^d \right)$. The function $f$ has Hermite rank $q$, if
+\begin{align*}
+\E\left[ \left( f(x) - \E\left[f \left(x\right) \right]\right)p_m(x)\right]=0,
+\end{align*}
+for all polynomials $p_m: \R^d \rightarrow \R$ that are of degree $m \leq q-1$ and there exists a polynomial $p_q$ of degree $q$ such that
+\begin{align*}
+\E\left[ \left( f(x) - \E\left[f \left(x\right) \right]\right)p_q(x)\right]\neq 0.
+\end{align*}
+\end{dfn}
+Let $X=\left(X_t\right)_{t\in \N}$ be a $d$-dimensional centered stationary Gaussian process, $X_t=\left(X_t^{(1)},X_t^{(2)},\ldots, X_t^{(d)} \right)$, where $d \geq 1$ and the components of $X_t$ are real-valued for every $t\in \N$. We denote the covariance between $X_t^{(k)}$ and $X_0^{(j)}$ as
+\begin{align*}
+r^{(k,j)}(t) = \E\left[ X_t^{(k)} X_0^{(j)}\right],
+\end{align*}
+where $0 \leq k,j \leq d$ and $t\in \N$. Then, we have the following well-known result from \cite{breuer-major}.
+
+\begin{thm}[Breuer-Major Theorem for Stationary Vectors]
+\label{thm:breuer-major}
+\quad \\
+Let $\E\left[f^2\left(X_0\right)\right] < \infty$ and let $f$ be a function of Hermite rank $q \geq 1$. Additionally, let the covariance function of $X$ satisfy
+\begin{align*}
+\sum_{t=0}^\infty \left|r^{(k,j)}\left(t\right)\right|^q < \infty,
+\end{align*}
+for every $k,j \in \left\{1,\ldots,d\right\}$. Then $\sigma^2 = \E\left[f^2\left(X_0\right)\right] + 2\sum_{t=0}^\infty \E\left[f\left(X_0\right) f\left(X_t\right) \right]\\ =  \Var\left[f^2\left(X_0\right)\right] + 2 \sum_{t=0}^\infty\Cov\left[f\left(X_0\right)f\left(X_t\right)\right]$ is well-defined and
+\begin{align*}
+\frac{1}{\sqrt{T}} \sum_{t=1}^T \left[ f\left(X_t\right) - \E\left[f\left(X_t\right)\right] \right] \dist P \sim  N\left(0,\sigma^2\right),
+\end{align*}
+where we denote converge in distribution as $\dist$.
+
+
+\end{thm}
+\begin{rem}
+Even a stronger version of Theorem \ref{thm:breuer-major} holds. Furthermore, one can derive Berry-Esseen type bounds in this case as well. For details we refer to \cite{ivan-et-al}.
+\end{rem}
+Suppose now that covariances and cross-covariances of series $a^k$:s and $b^j$:s are given.
+We consider the following model which is a multidimensional version of the one introduced in \cite{ilm-vii}.
+\begin{dfn}
+\label{def:model}
+Let $X=(X^1,X^2,\ldots,X^{2d})$ be a stationary Gaussian vector with covariances
+$$
+r^{k,j}(n) = \E [X^k_n X^j_0].
+$$
+We assume that there exists functions $f_k,\quad k=1,2,\ldots,2d$ such that, for each $k$, we have $\E f_k(N)^4 < \infty$, $f_k$ has a Hermite rank 1, and 
+$$
+a^k= f_k(X^k), \quad k=1,2,\ldots,d,
+$$
+$$
+b^k = f_{d+k}(X^{d+k}),\quad k=1,2,\ldots,d.
+$$
+Furthermore, we assume that 
+\begin{equation}
+\label{eq:cov_a}
+|r^{k,j}(t)\leq |Cov(a_t^k,a_0^j)|\leq C |r^{k,j}(t)|,
+\end{equation}
+\begin{equation}
+\label{eq:cov_b}
+c|r^{d+k,d+j}(t)| \leq |Cov(b_t^k,b_0^j)| \leq C|r^{d+k,d+j}(t)|,
+\end{equation}
+and
+\begin{equation}
+\label{eq:cov_ab}
+c|r^{k,d+j}(t)|\leq Cov(a_t^k,b_0^j) \leq C|r^{k,d+j}(t)|,
+\end{equation}
+for some constants $c,C>0$ and for all $k,j=1,2,\ldots, d$.
+\end{dfn}
+We stress that our model is very general. Indeed, it has been shown in \cite{ilm-vii} that within the model, each $a^k$ and $b^k$ can have arbitrary one-dimensional marginal distributions and arbitrary covariance structure, and that for a given time series $a$ one can always construct the driving Gaussian process $X$ in such a way that $Cov(X_t,X_0) \sim Cov(a_t,a_0)$. Similarly, by following the proof of \cite[Lemma (REF)]{ilm-vii} one observes that we can always construct the multidimensional Gaussian stationary vector with corresponding cross-covariances, and this fact justifies assumptions \eqref{eq:cov_a}--\eqref{eq:cov_ab}. For detailed discussion on these facts in univariate case the interested reader is referred to \cite{ilm-vii}.
+
+
+We are interested in $d\times d$-matrix
+$$
+\hat{S}_\tau - S_\tau
+$$
+and its symmetric version
+$$
+\hat{S}_\tau^s - S^s_\tau.
+$$
+Within our model, the following theorem is an immediate consequence of Theorem \ref{thm:breuer-major}.
+\begin{thm}
+Suppose that the time series $\vz$ satisfies assumptions of Definition \ref{def:model} and denote
+$$
+C^{k,j}(t) = Cov(x^k_t,x^j_0),
+$$
+where $x^k=a^k$ for $k=1,2,\ldots,d$ and $x^k=b^k$ for $k=d+1,d+2,\ldots,2d$. If 
+\begin{equation}
+\label{eq:cov_assumption}
+\max_{1\leq k,j\leq 2d, k\neq j\pm d} \sum_{t=1}^\infty |C^{k,j}(t)| < \infty,
+\end{equation}
+then there exists matrices $\Sigma_1,\Sigma_2,C_1$, and $C_2$ such that 
+\begin{equation}
+\label{eq:mean_conv}
+\sqrt{T} \left[m_z-\E \vz_0\right] \rightarrow N(0,\Sigma_1,C_1)
+\end{equation}
+and
+\begin{equation}
+\label{eq:cov_conv}
+\sqrt{T}\left[\hat{S}^s_\tau - S^s_\tau\right] \rightarrow N(0,\Sigma_2,C_2).
+\end{equation}
+\end{thm}
+Before proving the statement we make some remarks on the assumptions. We emphasize that each stationary component $a^k$ and $b^j$ can have arbitrary (different) distributions and arbitrary covariance structure. The condition \eqref{eq:cov_assumption} then simply means that the covariance function for each component is absolutely summable, an assumption which is usually satisfied, e.g. for linear processes. Note that condition \eqref{eq:cov_assumption} allows dependence between components, as it simply states that cross-covariances of different components are absolutely summable except the cross-covariance between $a^k$ and $b^k$ for same $k$. In particular, we allow the real and imaginary part of the same component of vector $\vz$ to be highly dependent.
+\begin{proof}
+We have \eqref{eq:mean_conv} if and only if 
+$
+\sqrt{T}m_a
+$
+and 
+$
+\sqrt{T}m_b
+$
+converges towards normal distributions, 
+and these follows directly from Theorem \ref{thm:breuer-major} together with Cramer-Wold theorem. 
+For convergence \eqref{eq:cov_conv}, note first that it suffices to show that
+$$
+\sqrt{T}\left[\tilde{S}^s_\tau - S^s_\tau\right]
+$$
+converges towards normal distribution,
+where $\tilde{S}^s_\tau$ is the symmetric version of 
+$$
+\tilde{S}_\tau = \frac{1}{T-\tau}\sum_{t=1}^{T-\tau} \vz_t \vz_{t+\tau}.
+$$
+Indeed, by direct computations (see also \cite[Lemma (REF)]{ilm-vii}) we observe
+$$
+\hat{S}_\tau = \tilde{S}_\tau  - m_zm_z^* + O(T^{-1})
+$$
+and $\sqrt{T}m_Zm_z^* \rightarrow 0$ by \eqref{eq:mean_conv}. Let us next analyse $\tilde{S}_\tau$. 
+For two time-indeces $t_1$ and $t_2$ we have
+$$
+\vz_{t_1} \vz_{t_2}^* = \va_{t_1}\va_{t_2}^T + \vb_{t_1}\vb_{t_2}^T + i\left(\vb_{t_1}\va_{t_2}^T-\va_{t_1}\vb_{t_2}^T\right).
+$$
+The element on row $j$ and column $k$ is 
+$$
+\left[\vz_{t_1}\vz_{t_2}^*\right]_{jk} = a^j_{t_1}a^k_{t_2}+b^j_{t_1}b^k_{t_2} + i\left(b_{t_1}^ja_{t_2}^k-a_{t_1}^jb_{t_2}^k\right).
+$$
+Hence the symmetrised version  
+$$
+\tilde{S}_\tau^s = \frac{1}{T-\tau}\sum_{t=1}^{T-\tau}\left(\vz_t \vz_{t+\tau}^* + \vz_{t+\tau} \vz_{t}^*\right) 
+$$
+satisfies
+\begin{equation*}
+\begin{split}
+\left[\tilde{S}_\tau^s\right]_{jk} &= \frac{1}{T-\tau}\sum_{t=1}^{T-\tau}\left(a^j_{t}a^k_{t+\tau}+a^j_{t+\tau}a^k_{t}+
+b^j_{t}b^k_{t+\tau}+b^j_{t+\tau}b^k_{t}\right) \\
+&+ 
+\frac{i}{T-\tau}\sum_{t=1}^{T-\tau}\left(b_t^ja^k_{t+\tau} +b_{t+\tau}^ja^k_{t}-a_{t}^jb_{t+\tau}^k-a_{t+\tau}^jb^k_t\right).
+\end{split}
+\end{equation*}
+In particular, for $j=k$ we have 
+$$
+b_t^ka^k_{t+\tau} +b_{t+\tau}^ka^k_{t}-a_{t}^kb_{t+\tau}^k-a_{t+\tau}^kb^k_t = 0
+$$
+and the imaginary part vanishes. Consequently, the convergence towards complex normal distribution follows from \eqref{eq:cov_assumption} together with Theorem \ref{thm:breuer-major} and Cramer Wold theorem.
+\end{proof}
+
+
+\section{Application to blind source separation}
+We consider the following complex blind source separation model.
+\begin{dfn}
+A $d$-variate time series $\vx$ follow a complex blind source separation model if
+\begin{equation}
+\label{model:BSS}
+\vx_t = \Omega \vz_t + \vmu,\quad t=0,\pm 1,\pm 2,\ldots
+\end{equation}
+where $\Omega$ is a full-rank $d \times d$-complex matrix, $\vmu$ is a complex valued constant, and the complex valued time series $\vz$ satisfies Assumptions of Definition \ref{def:model} such that each component $a^k$, $b^j$ are independent except pairs $a^k$ $b^j$ for $k=j$, i.e. real and imaginary parts of different components are independent but not necessarily within the same component. BLAH. other needed assumptions
+\end{dfn}
+
+\begin{rem}
+asd
+\end{rem}
+
+\begin{lma}
+Let $ \left(X_t \right)_{t\in \T}$, $\T = \left\{ 1,2,\ldots, T\right\}$, $T < \infty$, be an observed $d$-variate time series that follows the BSS model $\left(\ref{model:BSS}\right)$ and satisfies Assumptions XX and XX. It then follows   that $\sqrt{T}\left(\hat{S}_0 - S_0\right) = O_p(1)$ and $\sqrt{T}\left(\hat{S}_0 - S_0\right) $
+\end{lma}
+\begin{thm}
+CLT for $\vx$ once we have it for $\vz$. Like Corollary 1 in Miettinen et al. Everything should be clear however. Indeed, symmetrisation kills terms $a^kb^k$ and every other cross-term is independent.
+\end{thm}
+
+
+
+\subsection{Comparison to Miettinen et al.}
+If we pose similar assumptions as Miettinen et al. in Theorem 2, we can use real result directly to our case as symmetrisation kills the problematic cross-terms $a^kb^k$ in complex variable and everything else is of form $a^kb^j$ $k\neq j$ and $a^k$ and $b^j$ are uncorrelated. This is a stupid direction to go as we are not giving any essential input but maybe worth to mention somewhere.
+
+
+\bibliographystyle{plain}
+\bibliography{bibli_v2}
+\end{document}
